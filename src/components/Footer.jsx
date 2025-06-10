@@ -4,7 +4,7 @@ import { FaInstagram, FaTiktok, FaFacebookF } from 'react-icons/fa'
 const Footer = () => {
   return (
     <footer className="w-full bg-black py-6 mt-12">
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center px-2 sm:px-4">
         <h2 className="text-white text-lg mb-4 font-semibold">Follow BBG Classic</h2>
         <div className="flex space-x-6 mb-2">
           <a href="https://www.instagram.com/bgg_classics?igsh=Y3JuYXM2MWV5Ynow&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">

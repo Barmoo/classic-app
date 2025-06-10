@@ -2,12 +2,12 @@ import React from 'react'
 
 const Contact = () => {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center py-12 px-4">
-      <h1 className="text-3xl font-bold text-green-800 mb-6">Contact BBG Classics</h1>
-      <p className="text-gray-700 mb-8 text-center max-w-xl">
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center py-8 px-2 sm:px-4">
+      <h1 className="text-2xl sm:text-3xl font-bold text-green-800 mb-4 sm:mb-6 text-center">Contact BBG Classics</h1>
+      <p className="text-gray-700 mb-6 sm:mb-8 text-center max-w-xl px-1">
         We'd love to hear from you! Whether you have a question about our products, need assistance, or just want to share your feedback, our team is ready to help.
       </p>
-      <form className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md flex flex-col gap-4">
+      <form className="bg-white rounded-lg shadow-lg p-4 sm:p-8 w-full max-w-xs sm:max-w-md flex flex-col gap-4">
         <div>
           <label className="block text-gray-700 mb-1 font-medium">Name</label>
           <input
@@ -42,10 +42,22 @@ const Contact = () => {
           Send Message
         </button>
       </form>
-      <div className="mt-10 text-center text-gray-600">
-        <p>Email: <a href="mailto:info@bbgclassics.com" className="text-green-700 underline">info@bbgclassics.com</a></p>
-        <p>Phone: <a href="tel:+233249130774" className="text-green-700 underline">+233 249 130 774</a></p>
-        <p>Address: 123 BBG Classics Street, Accra, Ghana</p>
+      <div className="mt-8 sm:mt-10 text-center text-gray-600 text-sm sm:text-base px-2">
+        <p>
+          Email:{" "}
+          <a href="mailto:info@bbgclassics.com" className="text-green-700 underline break-all">
+            info@bbgclassics.com
+          </a>
+        </p>
+        <p>
+          Phone:{" "}
+          <a href="tel:+233249130774" className="text-green-700 underline">
+            +233 249 130 774
+          </a>
+        </p>
+        <p>
+          Address: 123 BBG Classics Street, Accra, Ghana
+        </p>
       </div>
     </div>
   )
