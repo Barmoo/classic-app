@@ -3,7 +3,7 @@ import React from 'react'
 const Contact = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center py-8 px-2 sm:px-4">
-      <h1 className="text-2xl sm:text-3xl font-bold text-green-800 mb-4 sm:mb-6 text-center">Contact BBG Classics</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold text-pink-600 mb-4 sm:mb-6 text-center">Contact BBG Classics</h1>
       <p className="text-gray-700 mb-6 sm:mb-8 text-center max-w-xl px-1">
         We'd love to hear from you! Whether you have a question about our products, need assistance, or just want to share your feedback, our team is ready to help.
       </p>
@@ -12,7 +12,7 @@ const Contact = () => {
           <label className="block text-gray-700 mb-1 font-medium">Name</label>
           <input
             type="text"
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
             placeholder="Your Name"
             required
           />
@@ -21,7 +21,7 @@ const Contact = () => {
           <label className="block text-gray-700 mb-1 font-medium">Email</label>
           <input
             type="email"
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
             placeholder="you@email.com"
             required
           />
@@ -29,7 +29,7 @@ const Contact = () => {
         <div>
           <label className="block text-gray-700 mb-1 font-medium">Message</label>
           <textarea
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
             rows="4"
             placeholder="Type your message here..."
             required
@@ -37,7 +37,7 @@ const Contact = () => {
         </div>
         <button
           type="submit"
-          className="bg-green-700 text-white font-semibold py-2 rounded hover:bg-green-800 transition"
+          className="bg-pink-600 text-white font-semibold py-2 rounded hover:bg-pink-500 transition"
         >
           Send Message
         </button>
@@ -45,13 +45,13 @@ const Contact = () => {
       <div className="mt-8 sm:mt-10 text-center text-gray-600 text-sm sm:text-base px-2">
         <p>
           Email:{" "}
-          <a href="mailto:info@bbgclassics.com" className="text-green-700 underline break-all">
+          <a href="mailto:info@bbgclassics.com" className="text-pink-600 underline break-all">
             info@bbgclassics.com
           </a>
         </p>
         <p>
           Phone:{" "}
-          <a href="tel:+233249130774" className="text-green-700 underline">
+          <a href="tel:+233249130774" className="text-pink-600 underline">
             +233 249 130 774
           </a>
         </p>
