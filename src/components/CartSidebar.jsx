@@ -40,15 +40,16 @@ const CartSidebar = ({ isOpen, onClose }) => {
             ) : (
               <div className="space-y-4">
                 {cartItems.map((item) => (
-                  <div key={item.id} className="flex items-center gap-4 p-4 border rounded-lg">
-                    <img 
-                      src={item.image} 
+                  <div key={item.id} className="flex items-center gap-4 p-4 border rounded-lg">                    <img 
+                      src={item.images ? item.images[0] : item.image} 
                       alt={item.name}
                       className="w-16 h-16 object-cover rounded-lg"
                     />
                     <div className="flex-1">
                       <h3 className="font-semibold text-gray-800">{item.name}</h3>
-                      <p className="text-purple-600 font-semibold">{item.price}</p>
+                      <p className="text-purple-600 font-semibold">
+                        {typeof item.price === 'string' ? item.price : `GHC ${item.price.toFixed(2)}`}
+                      </p>
                       
                       {/* Quantity Controls */}
                       <div className="flex items-center gap-2 mt-2">

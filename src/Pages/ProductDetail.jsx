@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, Link, useLocation } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { useToast } from '../context/ToastContext'
 import { FaShoppingCart, FaStar, FaHeart, FaShare, FaArrowLeft, FaLeaf, FaShieldAlt, FaCheck, FaTruck, FaPhoneAlt } from 'react-icons/fa'
@@ -10,12 +10,16 @@ import smallOil from '../assets/images/small-oil.png'
 
 const ProductDetail = () => {
   const { id } = useParams()
-  const navigate = useNavigate()
+  const location = useLocation()
   const { addToCart } = useCart()
   const { showToast } = useToast()
   const [quantity, setQuantity] = useState(1)
   const [selectedImage, setSelectedImage] = useState(0)
   const [activeTab, setActiveTab] = useState('description')
+
+  // Check if product data was passed via location state (from CoconutSnacks page)
+  const locationProduct = location.state?.product
+  const productCategory = location.state?.category || 'oil'
 
   // Same products data as in OilCategory - in a real app, this would come from an API
   const products = [
@@ -174,18 +178,21 @@ const ProductDetail = () => {
       storage: "Store all bottles in cool, dry place.",
       weight: "3 x 250ml bottles",
       origin: "Ghana"
-    }
-  ]
+    }  ]
 
-  const product = products.find(p => p.id === parseInt(id))
+  // Use product from location state if available, otherwise find from local products array
+  const product = locationProduct || products.find(p => p.id === parseInt(id))
 
   if (!product) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">Product not found</h2>
-          <Link to="/oil" className="text-purple-600 hover:text-purple-800">
-            Back to Oil Category
+          <Link 
+            to={productCategory === 'snacks' ? '/snacks' : '/oil'} 
+            className="text-purple-600 hover:text-purple-800"
+          >
+            Back to {productCategory === 'snacks' ? 'Coconut Snacks' : 'Oil Category'}
           </Link>
         </div>
       </div>
@@ -200,6 +207,22 @@ const ProductDetail = () => {
       />
     ))
   }
+  // Helper function to format price consistently
+  const formatPrice = (price) => {
+    if (typeof price === 'number') {
+      return `GHC ${price.toFixed(2)}`
+    }
+    return price // Already formatted string
+  }
+
+  // Helper function to get numeric price value
+  const getNumericPrice = (price) => {
+    if (typeof price === 'number') {
+      return price
+    }
+    return parseFloat(price.replace('GHC ', ''))
+  }
+
   const handleAddToCart = () => {
     addToCart(product, quantity)
     showToast(`Added ${quantity} ${product.name} to cart!`, 'success')
@@ -215,25 +238,27 @@ const ProductDetail = () => {
   return (
     <div className="min-h-screen bg-gray-50 pt-24">
       {/* Breadcrumb */}
-      <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 py-4">
-        <div className="flex items-center gap-2 text-sm text-gray-600">
+      <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 py-4">        <div className="flex items-center gap-2 text-sm text-gray-600">
           <Link to="/" className="hover:text-purple-600">Home</Link>
           <span>/</span>
-          <Link to="/oil" className="hover:text-purple-600">Natural Oils</Link>
+          <Link 
+            to={productCategory === 'snacks' ? '/snacks' : '/oil'} 
+            className="hover:text-purple-600"
+          >
+            {productCategory === 'snacks' ? 'Coconut Snacks' : 'Natural Oils'}
+          </Link>
           <span>/</span>
           <span className="text-gray-800">{product.name}</span>
         </div>
-      </div>
-
-      {/* Back Button */}
+      </div>      {/* Back Button */}
       <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 mb-6">
-        <button 
-          onClick={() => navigate(-1)}
+        <Link 
+          to={productCategory === 'snacks' ? '/snacks' : '/oil'}
           className="flex items-center gap-2 text-purple-600 hover:text-purple-800 transition-colors"
         >
           <FaArrowLeft />
-          Back to Products
-        </button>
+          Back to {productCategory === 'snacks' ? 'Coconut Snacks' : 'Oil Category'}
+        </Link>
       </div>
 
       {/* Product Detail */}
@@ -288,17 +313,15 @@ const ProductDetail = () => {
                 <span className="text-lg font-semibold">{product.rating}</span>
               </div>
               <span className="text-gray-600">({product.reviews} reviews)</span>
-            </div>
-
-            {/* Price */}
+            </div>            {/* Price */}
             <div className="flex items-center gap-4">
-              <span className="text-3xl font-bold text-purple-700">{product.price}</span>
+              <span className="text-3xl font-bold text-purple-700">{formatPrice(product.price)}</span>
               {product.originalPrice && (
-                <span className="text-xl text-gray-400 line-through">{product.originalPrice}</span>
+                <span className="text-xl text-gray-400 line-through">{formatPrice(product.originalPrice)}</span>
               )}
               {product.originalPrice && (
                 <span className="bg-red-100 text-red-600 px-2 py-1 rounded-full text-sm font-semibold">
-                  Save {((parseFloat(product.originalPrice.replace('GHC ', '')) - parseFloat(product.price.replace('GHC ', ''))) / parseFloat(product.originalPrice.replace('GHC ', '')) * 100).toFixed(0)}%
+                  Save {((getNumericPrice(product.originalPrice) - getNumericPrice(product.price)) / getNumericPrice(product.originalPrice) * 100).toFixed(0)}%
                 </span>
               )}
             </div>

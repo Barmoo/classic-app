@@ -45,13 +45,21 @@ const Navbar = () => {
               Oil
             </Link>
             <Link 
+              to="/snacks" 
+              className={`cursor-pointer hover:text-yellow-400 transition pb-1 ${
+                isActive('/snacks') ? 'border-b-2 border-yellow-400 text-yellow-400' : ''
+              }`}
+            >
+              Coconut Snacks
+            </Link>
+            <Link 
               to="/beauty" 
               className={`cursor-pointer hover:text-yellow-400 transition pb-1 ${
                 isActive('/beauty') ? 'border-b-2 border-yellow-400 text-yellow-400' : ''
               }`}
             >
               Beauty
-            </Link>            <Link 
+            </Link><Link 
               to="/about" 
               className={`cursor-pointer hover:text-yellow-400 transition pb-1 ${
                 isActive('/about') ? 'border-b-2 border-yellow-400 text-yellow-400' : ''
@@ -113,6 +121,15 @@ const Navbar = () => {
               onClick={() => setMenuOpen(false)}
             >
               Oil
+            </Link>
+            <Link 
+              to="/snacks" 
+              className={`cursor-pointer hover:text-yellow-400 transition ${
+                isActive('/snacks') ? 'text-yellow-400' : ''
+              }`} 
+              onClick={() => setMenuOpen(false)}
+            >
+              Coconut Snacks
             </Link>
             <Link 
               to="/beauty" 

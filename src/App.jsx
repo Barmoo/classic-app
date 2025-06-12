@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import Contact from "./Pages/Contact";
 import About from "./Pages/About";
 import OilCategory from "./Pages/OilCategory";
+import CoconutSnacks from "./Pages/CoconutSnacks";
 import ProductDetail from "./Pages/ProductDetail";
 import Checkout from "./Pages/Checkout";
 import BeautyProducts from "./Pages/BeautyProducts";
@@ -36,6 +37,8 @@ const App = () => {
                             <Route path="/" element={<HomePage />} />
                             <Route path="/oil" element={<OilCategory />} />
                             <Route path="/oil/:id" element={<ProductDetail />} />
+                            <Route path="/snacks" element={<CoconutSnacks />} />
+                            <Route path="/product/:id" element={<ProductDetail />} />
                             <Route path="/beauty" element={<BeautyProducts />} />
                             <Route path="/about" element={<About />} />
                             <Route path="/contact" element={<Contact />} />

@@ -226,7 +226,7 @@ const Hero = () => {
               </div>
               <div className="flex items-center gap-2">
                 <FaHeart className="text-red-400" />
-                <span className="text-sm">Made with Love</span>
+                <span className="text-sm">Loved by Many</span>
               </div>
             </div>
           </div>

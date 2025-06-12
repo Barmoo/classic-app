@@ -21,7 +21,6 @@ export const CartProvider = ({ children }) => {
       setCartItems(JSON.parse(savedCart))
     }
   }, [])
-
   // Save cart to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cartItems))
@@ -65,13 +64,18 @@ export const CartProvider = ({ children }) => {
   const clearCart = () => {
     setCartItems([])
   }
-
   const getCartTotal = () => {
     return cartItems.reduce((total, item) => {
-      const price = parseFloat(item.price.replace('GHC ', ''))
-      return total + (price * item.quantity)
-    }, 0)
-  }
+      // Handle both string prices (like "GHC 45.00") and number prices (like 15.99)
+      let price;
+      if (typeof item.price === 'string') {
+        price = parseFloat(item.price.replace('GHC ', ''));
+      } else {
+        price = parseFloat(item.price);
+      }
+      return total + (price * item.quantity);
+    }, 0);
+  };
 
   const getCartItemsCount = () => {
     return cartItems.reduce((total, item) => total + item.quantity, 0)

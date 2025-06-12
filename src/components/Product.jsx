@@ -192,11 +192,40 @@ const Product = () => {
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Indulge in the perfect balance of sweet, nutty coconut flavors and a satisfying crunch 
                 that transports you straight to a sun-soaked island with every bite.
-              </p>
-              <img src={Chips1} alt="Coconut Snack Delight" className="w-32 h-32 object-cover rounded-lg mx-auto mb-6 shadow-md" />
-              <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center gap-2 mx-auto">
-                SHOP NOW <FaArrowRight />
-              </button>
+              </p>              <img src={Chips1} alt="Coconut Snack Delight" className="w-32 h-32 object-cover rounded-lg mx-auto mb-6 shadow-md" />
+              <Link 
+                to="/product/1" 
+                state={{ 
+                  product: {
+                    id: 1,
+                    name: 'Premium Coconut Chips - Original',
+                    price: 15.99,
+                    images: [Chips1],
+                    rating: 4.7,
+                    reviews: 89,
+                    description: 'Crispy and naturally sweet coconut chips, perfect for snacking or adding to your favorite dishes.',
+                    longDescription: 'Our Premium Coconut Chips are made from the finest mature coconuts, carefully sliced and toasted to perfection. These crispy, golden chips retain their natural sweetness and coconut flavor. Perfect for snacking, baking, or as a healthy topping for yogurt, smoothie bowls, and cereals.',
+                    benefits: [
+                      'High in healthy fats and fiber',
+                      'No artificial preservatives',
+                      'Gluten-free and vegan',
+                      'Rich in minerals like iron and zinc',
+                      'Natural source of energy'
+                    ],
+                    ingredients: '100% Pure Coconut',
+                    weight: '150g',
+                    origin: 'Ghana',
+                    category: 'snacks',
+                    inStock: true,
+                    stockCount: 32
+                  }, 
+                  category: 'snacks' 
+                }}
+                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center justify-center gap-2 mx-auto"
+              >
+                <FaArrowRight />
+                Shop Now
+              </Link>
             </div>
             
             {/* Snack 2 */}
@@ -208,11 +237,40 @@ const Product = () => {
               <p className="text-gray-600 mb-6 leading-relaxed">
                 These bite-sized treats are bursting with the rich, creamy flavor of pure coconut, 
                 offering a perfect blend of chewy sweetness and a hint of paradise in every piece.
-              </p>
-              <img src={Chips2} alt="Coconut Bliss Bites" className="w-32 h-32 object-cover rounded-lg mx-auto mb-6 shadow-md" />
-              <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center gap-2 mx-auto">
-                SHOP NOW <FaArrowRight />
-              </button>
+              </p>              <img src={Chips2} alt="Coconut Bliss Bites" className="w-32 h-32 object-cover rounded-lg mx-auto mb-6 shadow-md" />
+              <Link 
+                to="/product/2" 
+                state={{ 
+                  product: {
+                    id: 2,
+                    name: 'Spiced Coconut Chips',
+                    price: 17.99,
+                    images: [Chips2],
+                    rating: 4.6,
+                    reviews: 67,
+                    description: 'Deliciously seasoned coconut chips with a blend of spices for an exotic taste experience.',
+                    longDescription: 'Experience the perfect fusion of tropical coconut and exotic spices. Our Spiced Coconut Chips are carefully seasoned with a proprietary blend of natural spices including paprika, turmeric, and chili powder, creating a delightful balance of sweet and savory flavors.',
+                    benefits: [
+                      'Unique blend of natural spices',
+                      'Antioxidant-rich ingredients',
+                      'Perfect balance of sweet and savory',
+                      'Healthy alternative to potato chips',
+                      'Energy-boosting snack'
+                    ],
+                    ingredients: 'Coconut, Natural Spices (Paprika, Turmeric, Chili Powder, Salt)',
+                    weight: '150g',
+                    origin: 'Ghana',
+                    category: 'snacks',
+                    inStock: true,
+                    stockCount: 28
+                  }, 
+                  category: 'snacks' 
+                }}
+                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center justify-center gap-2 mx-auto"
+              >
+                <FaArrowRight />
+                Shop Now
+              </Link>
             </div>
             
             {/* Snack 3 */}
@@ -224,22 +282,52 @@ const Product = () => {
               <p className="text-gray-600 mb-6 leading-relaxed">
                 These delightful snacks capture the essence of the tropics with every crispy, coconut-infused bite, 
                 delivering a burst of natural sweetness that feels like a vacation in your mouth.
-              </p>
-              <img src={Chips3} alt="Coconut Munchies" className="w-32 h-32 object-cover rounded-lg mx-auto mb-6 shadow-md" />
-              <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center gap-2 mx-auto">
-                SHOP NOW <FaArrowRight />
-              </button>
+              </p>              <img src={Chips3} alt="Coconut Munchies" className="w-32 h-32 object-cover rounded-lg mx-auto mb-6 shadow-md" />
+              <Link 
+                to="/product/3" 
+                state={{ 
+                  product: {
+                    id: 3,
+                    name: 'Toasted Coconut Chips',
+                    price: 16.99,
+                    images: [Chips3],
+                    rating: 4.8,
+                    reviews: 94,
+                    description: 'Golden toasted coconut chips with a rich, nutty flavor that melts in your mouth.',
+                    longDescription: 'Our Toasted Coconut Chips are slowly roasted to achieve the perfect golden color and intense coconut flavor. The toasting process brings out the natural oils and creates a rich, nutty taste with a satisfying crunch that gradually melts in your mouth.',
+                    benefits: [
+                      'Slow-roasted for optimal flavor',
+                      'Rich in medium-chain triglycerides',
+                      'Natural source of potassium',
+                      'Satisfying crunch and texture',
+                      'Perfect for dessert toppings'
+                    ],
+                    ingredients: '100% Pure Toasted Coconut',
+                    weight: '150g',
+                    origin: 'Ghana',
+                    category: 'snacks',
+                    inStock: true,
+                    stockCount: 41
+                  }, 
+                  category: 'snacks' 
+                }}
+                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center justify-center gap-2 mx-auto"
+              >
+                <FaArrowRight />
+                Shop Now
+              </Link>
             </div>
           </div>
 
           {/* Promo Banner */}
-          <div className="bg-gradient-to-r from-gray-900 to-black rounded-2xl p-8 md:p-12 text-center shadow-xl">
-            <h2 className="text-white text-2xl md:text-4xl font-bold mb-4">Get 10% Off On Your First Purchase</h2>
-            <p className="text-gray-300 mb-8 text-lg">Join our community of satisfied customers and save on your first order!</p>
-            <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center gap-2 mx-auto">
-              <FaShoppingCart />
+          <div className="bg-gradient-to-r from-gray-900 to-black rounded-2xl p-8 md:p-12 text-center shadow-xl">            <h2 className="text-white text-2xl md:text-4xl font-bold mb-4">Get 10% Off On Your First Purchase</h2>
+            <p className="text-gray-300 mb-8 text-lg">Join our community of satisfied customers and save on your first order!</p>            <Link 
+              to="/snacks"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300"
+            >
+              <FaArrowRight />
               Shop Now
-            </button>
+            </Link>
           </div>
         </div>
       </div>
