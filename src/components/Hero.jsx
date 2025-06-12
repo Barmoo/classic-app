@@ -79,7 +79,7 @@ const Hero = () => {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
             <span className="text-white drop-shadow-lg">Join The</span>
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-purple-600 drop-shadow-lg animate-pulse">
+            <span className="text-purple-800 drop-shadow-lg animate-pulse">
               Organic Movement!
             </span>
           </h1>
@@ -99,7 +99,7 @@ const Hero = () => {
               <HiSparkles className="text-yellow-300 group-hover:animate-spin" />
             </button>
             
-            <button className='group bg-white/20 backdrop-blur-sm hover:bg-white/30 px-8 py-4 text-white text-lg font-semibold flex items-center justify-center gap-3 rounded-full border-2 border-white/40 transition-all duration-300 hover:border-white/60 transform hover:scale-105 relative overflow-hidden'>
+            <button className='group bg-white/10 backdrop-blur-sm hover:bg-white/30 px-8 py-4 text-white text-lg font-semibold flex items-center justify-center gap-3 rounded-full border-2 border-white/40 transition-all duration-300 hover:border-white/60 transform hover:scale-105 relative overflow-hidden'>
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
               <FaPlay className="text-lg group-hover:animate-pulse" /> 
               <span>Watch Story</span>
