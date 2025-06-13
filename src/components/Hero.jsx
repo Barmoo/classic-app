@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import herologo from '../assets/images/herologo.png'
 import { FaTruckMoving, FaShoppingCart, FaLeaf, FaStar, FaPlay, FaCheckCircle, FaHeart, FaUsers, FaAward, FaShieldAlt } from "react-icons/fa";
 import { RiContactsBook3Fill } from "react-icons/ri";
@@ -89,21 +90,25 @@ const Hero = () => {
             From kitchen essentials to beauty accessories, discover the natural            goodness that brings <span className="text-yellow-300 font-bold bg-black/20 px-3 py-1 rounded-lg shadow-lg">tropical richness</span> 
             to your everyday routine.
           </p>
-          
-          {/* Enhanced CTA buttons with improved styling */}
+            {/* Enhanced CTA buttons with improved styling */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-6">
-            <button className='group bg-gradient-to-r from-pink-600 via-pink-700 to-purple-700 hover:from-pink-700 hover:via-purple-700 hover:to-pink-800 px-10 py-4 text-white text-lg font-semibold flex items-center justify-center gap-3 rounded-full shadow-xl transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/30 transform hover:scale-105 hover:-translate-y-1 border-2 border-white/20 relative overflow-hidden'>
+            <Link 
+              to="/oil"
+              className='group bg-gradient-to-r from-pink-600 via-pink-700 to-purple-700 hover:from-pink-700 hover:via-purple-700 hover:to-pink-800 px-10 py-4 text-white text-lg font-semibold flex items-center justify-center gap-3 rounded-full shadow-xl transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/30 transform hover:scale-105 hover:-translate-y-1 border-2 border-white/20 relative overflow-hidden'
+            >
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
               <FaShoppingCart className="text-xl group-hover:animate-bounce" /> 
               <span>Shop Now</span>
               <HiSparkles className="text-yellow-300 group-hover:animate-spin" />
-            </button>
-            
-            <button className='group bg-white/10 backdrop-blur-sm hover:bg-white/30 px-8 py-4 text-white text-lg font-semibold flex items-center justify-center gap-3 rounded-full border-2 border-white/40 transition-all duration-300 hover:border-white/60 transform hover:scale-105 relative overflow-hidden'>
+            </Link>            
+            <Link 
+              to="/about"
+              className='group bg-white/10 backdrop-blur-sm hover:bg-white/30 px-8 py-4 text-white text-lg font-semibold flex items-center justify-center gap-3 rounded-full border-2 border-white/40 transition-all duration-300 hover:border-white/60 transform hover:scale-105 relative overflow-hidden'
+            >
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
               <FaPlay className="text-lg group-hover:animate-pulse" /> 
               <span>Watch Story</span>
-            </button>
+            </Link>
           </div>
             {/* Enhanced social proof with testimonial preview */}
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6">

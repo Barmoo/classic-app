@@ -269,15 +269,14 @@ const Footer = () => {
             <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
               <p className="text-gray-400 text-sm">
                 &copy; {currentYear} BGG Classics. All rights reserved.
-              </p>
-              <div className="flex space-x-4 text-sm">
-                <Link to="/contact" className="text-gray-400 hover:text-pink-400 transition-colors">
+              </p>              <div className="flex space-x-4 text-sm">
+                <Link to="/privacy-policy" className="text-gray-400 hover:text-pink-400 transition-colors">
                   Privacy Policy
                 </Link>
-                <Link to="/contact" className="text-gray-400 hover:text-pink-400 transition-colors">
+                <Link to="/terms-of-service" className="text-gray-400 hover:text-pink-400 transition-colors">
                   Terms of Service
                 </Link>
-                <Link to="/contact" className="text-gray-400 hover:text-pink-400 transition-colors">
+                <Link to="/cookie-policy" className="text-gray-400 hover:text-pink-400 transition-colors">
                   Cookie Policy
                 </Link>
               </div>

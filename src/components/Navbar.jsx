@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
+import { useAuth } from '../context/AuthContext'
 import CartSidebar from './CartSidebar'
 import Logo from '../assets/images/bgg-logo.png' // Assuming you have a logo image
-import { FaShoppingCart } from "react-icons/fa"
+import { FaShoppingCart, FaUser, FaSignOutAlt, FaUserPlus, FaSignInAlt } from "react-icons/fa"
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const location = useLocation();
   const { getCartTotal, getCartItemsCount } = useCart();
+  const { user, logout } = useAuth();
   
   const isActive = (path) => {
     if (path === '/' && location.pathname === '/') return true;
@@ -22,7 +25,7 @@ const Navbar = () => {
         {/* Logo - Left */}
         <div className="flex-shrink-0">
           <Link to="/" className="flex items-center">
-            <img src={Logo} alt="Logo" className="h-20 w-20 bg-white/90 rounded-lg p-1" />
+            <img src={Logo} alt="Logo" className="h-13 w-13 bg-white/90 rounded-lg p-1" />
           </Link>
         </div>
 
@@ -76,11 +79,11 @@ const Navbar = () => {
               Contact
             </Link>
           </div>
-        </div>
-
-        {/* Price and Cart - Right */}
-        <div className="hidden md:flex flex-shrink-0 items-center gap-x-1">
-          <span className="cursor-pointer text-green-400 font-semibold">GHC {getCartTotal().toFixed(2)}</span>
+        </div>        {/* Price, Cart, and Auth - Right */}
+        <div className="hidden md:flex flex-shrink-0 items-center gap-x-4">
+          <span className="cursor-pointer text-yellow-400 font-bold">GHC {getCartTotal().toFixed(2)}</span>
+          
+          {/* Cart Button */}
           <button 
             onClick={() => setCartOpen(true)}
             className="cursor-pointer hover:text-yellow-400 transition flex items-center relative"
@@ -92,6 +95,60 @@ const Navbar = () => {
               </span>
             )}
           </button>
+
+          {/* Authentication Section */}
+          {user ? (
+            <div className="relative">
+              <button
+                onClick={() => setUserMenuOpen(!userMenuOpen)}
+                className="flex items-center gap-2 hover:text-yellow-400 transition"
+              >
+                <FaUser className="text-lg" />
+                <span className="hidden lg:block">{user.firstName}</span>
+              </button>
+              
+              {userMenuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+                  <Link
+                    to="/profile"
+                    className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
+                    onClick={() => setUserMenuOpen(false)}
+                  >
+                    <FaUser className="text-purple-600" />
+                    My Profile
+                  </Link>
+                  <hr className="my-1" />
+                  <button
+                    onClick={() => {
+                      logout()
+                      setUserMenuOpen(false)
+                    }}
+                    className="w-full flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
+                  >
+                    <FaSignOutAlt className="text-red-600" />
+                    Sign Out
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <Link
+                to="/login"
+                className="flex items-center gap-1 px-3 py-2 text-sm hover:text-yellow-400 transition"
+              >
+                <FaSignInAlt />
+                <span className="hidden lg:block">Sign In</span>
+              </Link>
+              <Link
+                to="/register"
+                className="flex items-center gap-1 px-3 py-2 bg-yellow-400 text-purple-700 rounded-lg text-sm font-semibold hover:bg-yellow-300 transition"
+              >
+                <FaUserPlus />
+                <span className="hidden lg:block">Join Us</span>
+              </Link>
+            </div>
+          )}
         </div>
         {/* Hamburger menu button */}
         <button
@@ -174,6 +231,51 @@ const Navbar = () => {
                 </span>
               )}
             </button>
+            
+            {/* Mobile Authentication */}
+            <div className="border-t pt-2 mt-2">
+              {user ? (
+                <>
+                  <Link
+                    to="/profile"
+                    className="flex items-center gap-2 py-2 hover:text-yellow-400 transition"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <FaUser />
+                    Profile ({user.firstName})
+                  </Link>
+                  <button
+                    onClick={() => {
+                      logout()
+                      setMenuOpen(false)
+                    }}
+                    className="flex items-center gap-2 py-2 hover:text-yellow-400 transition text-left"
+                  >
+                    <FaSignOutAlt />
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="flex items-center gap-2 py-2 hover:text-yellow-400 transition"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <FaSignInAlt />
+                    Sign In
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="flex items-center gap-2 py-2 hover:text-yellow-400 transition"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <FaUserPlus />
+                    Join Us
+                  </Link>
+                </>
+              )}
+            </div>
           </div>
         </div>
       )}

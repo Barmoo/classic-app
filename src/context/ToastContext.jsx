@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState } from 'react'
-import Toast from '../components/Toast'
+/* eslint-disable react-refresh/only-export-components */
+import React, { createContext, useContext } from 'react'
+import { toast } from 'react-toastify'
 
 const ToastContext = createContext()
 
@@ -12,42 +13,44 @@ export const useToast = () => {
 }
 
 export const ToastProvider = ({ children }) => {
-  const [toasts, setToasts] = useState([])
-
   const showToast = (message, type = 'success', duration = 3000) => {
-    const id = Date.now() + Math.random()
-    const newToast = { id, message, type, duration }
-    
-    setToasts(prevToasts => [...prevToasts, newToast])
-  }
+    const toastOptions = {
+      position: "top-right",
+      autoClose: duration,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",      style: {
+        background: 'linear-gradient(to right, #ef4444, #ec4899)',
+        color: 'white',
+        fontWeight: '500',
+        borderRadius: '12px',
+        boxShadow: '0 10px 25px rgba(0, 0, 0, 0.2)'
+      }
+    }
 
-  const removeToast = (id) => {
-    setToasts(prevToasts => prevToasts.filter(toast => toast.id !== id))
+    switch (type) {
+      case 'success':
+        toast.success(message, toastOptions)
+        break
+      case 'error':
+        toast.error(message, toastOptions)
+        break
+      case 'info':
+        toast.info(message, toastOptions)
+        break
+      case 'warning':
+        toast.warn(message, toastOptions)
+        break
+      default:
+        toast(message, toastOptions)
+    }
   }
-
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      <div className="fixed top-24 right-4 z-50 space-y-2">
-        {toasts.map((toast, index) => (
-          <div
-            key={toast.id}
-            className="animate-slide-in-right"
-            style={{ 
-              transform: `translateY(${index * 80}px)`,
-              transition: 'transform 0.3s ease-out'
-            }}
-          >
-            <Toast
-              message={toast.message}
-              type={toast.type}
-              isVisible={true}
-              onClose={() => removeToast(toast.id)}
-              duration={toast.duration}
-            />
-          </div>
-        ))}
-      </div>
     </ToastContext.Provider>
   )
 }
