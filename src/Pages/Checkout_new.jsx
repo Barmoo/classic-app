@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useCart } from '../context/CartContext'
 import { useToast } from '../context/ToastContext'
-import { useNavigate } from 'react-router-dom'
-import { FaShieldAlt, FaTruck, FaCreditCard, FaUser, FaMapMarkerAlt, FaPhone, FaEnvelope, FaLock, FaMoneyBillWave, FaMapPin, FaStore } from 'react-icons/fa'
+import { useAuth } from '../context/AuthContext'
+import { useNavigate, Link } from 'react-router-dom'
+import { FaShieldAlt, FaTruck, FaCreditCard, FaUser, FaMapMarkerAlt, FaPhone, FaEnvelope, FaLock, FaMoneyBillWave, FaMapPin, FaStore, FaSignInAlt, FaUserPlus } from 'react-icons/fa'
 
-const Checkout = () => {
-  const { cartItems, getCartTotal, clearCart } = useCart()
+const Checkout = () => {  const { cartItems, getCartTotal, clearCart } = useCart()
   const { showToast } = useToast()
+  const { user, register } = useAuth()
   const navigate = useNavigate()
   
   const [formData, setFormData] = useState({
@@ -30,8 +31,51 @@ const Checkout = () => {
     paymentMethod: 'paystack', // 'paystack' or 'cash-on-delivery'
     
     // Order Notes
-    orderNotes: ''
+    orderNotes: '',
+    
+    // Account creation option for guest users
+    createAccount: false,
+    password: '',
+    confirmPassword: ''
   })
+
+  // Pre-fill form with user data if logged in
+  useEffect(() => {
+    if (user) {
+      setFormData(prev => ({
+        ...prev,
+        firstName: user.firstName || '',
+        lastName: user.lastName || '',
+        email: user.email || '',
+        phone: user.phone || ''
+      }))
+    }
+  }, [user])
+  // Helper function to create account for guest users
+  const createGuestAccount = async () => {
+    try {
+      const result = await register({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+        phone: formData.phone,
+        newsletter: false
+      })
+      
+      if (result.success) {
+        showToast(`Account created successfully! Welcome to BGG Classics, ${result.user.firstName}!`, 'success')
+      } else {
+        console.error('Account creation failed:', result.error)
+        // Don't fail the order if account creation fails
+        showToast('Order will be processed, but account creation failed. You can create an account later.', 'warning')
+      }
+    } catch (error) {
+      console.error('Account creation error:', error)
+      // Don't fail the order if account creation fails
+      showToast('Order will be processed, but account creation failed. You can create an account later.', 'warning')
+    }
+  }
   
   const [errors, setErrors] = useState({})
   const [isProcessing, setIsProcessing] = useState(false)
@@ -58,7 +102,6 @@ const Checkout = () => {
       setErrors(prev => ({ ...prev, [name]: '' }))
     }
   }
-
   const validateForm = () => {
     const newErrors = {}
     
@@ -71,6 +114,20 @@ const Checkout = () => {
       newErrors.email = 'Please enter a valid email address'
     }
     if (!formData.phone.trim()) newErrors.phone = 'Phone number is required'
+    
+    // Account creation validation (for guest users only)
+    if (!user && formData.createAccount) {
+      if (!formData.password.trim()) {
+        newErrors.password = 'Password is required'
+      } else if (formData.password.length < 6) {
+        newErrors.password = 'Password must be at least 6 characters long'
+      }
+      if (!formData.confirmPassword.trim()) {
+        newErrors.confirmPassword = 'Please confirm your password'
+      } else if (formData.password !== formData.confirmPassword) {
+        newErrors.confirmPassword = 'Passwords do not match'
+      }
+    }
     
     // Delivery Method validation
     if (formData.deliveryMethod === 'pickup-station' && !formData.pickupStation.trim()) {
@@ -209,10 +266,14 @@ const Checkout = () => {
       throw new Error(error.message || 'Failed to initialize payment. Please try again.')
     }
   }
-
   const processOrderWithPayment = async (paymentReference) => {
     try {
       console.log('Processing order with payment reference:', paymentReference)
+      
+      // Create account if requested by guest user
+      if (!user && formData.createAccount) {
+        await createGuestAccount()
+      }
       
       const orderData = {
         customer: {
@@ -286,10 +347,14 @@ const Checkout = () => {
       throw new Error('Order processing failed. Please contact support with your payment reference: ' + paymentReference)
     }
   }
-
   const processCashOnDeliveryOrder = async () => {
     try {
       console.log('Processing cash on delivery order')
+      
+      // Create account if requested by guest user
+      if (!user && formData.createAccount) {
+        await createGuestAccount()
+      }
       
       const orderData = {
         customer: {
@@ -386,11 +451,69 @@ const Checkout = () => {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">Checkout</h1>
           <p className="text-gray-600">Complete your order securely and safely</p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        </div>        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Checkout Form */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2">            {/* Login Suggestion for Guest Users */}
+            {!user && (
+              <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-2xl p-6 mb-8">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-full p-3">
+                      <FaUser className="text-purple-600 text-lg" />
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                      Have an account? Sign in for a faster checkout
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-4">
+                      Skip filling out your details every time and track your orders easily.
+                    </p>
+                    <div className="flex flex-wrap gap-3">
+                      <Link
+                        to="/login"
+                        state={{ from: { pathname: '/checkout' } }}
+                        className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg text-sm font-medium hover:from-purple-700 hover:to-pink-700 transition-all"
+                      >
+                        <FaSignInAlt />
+                        Sign In
+                      </Link>
+                      <Link
+                        to="/register"
+                        state={{ from: { pathname: '/checkout' } }}
+                        className="flex items-center gap-2 px-4 py-2 border border-purple-600 text-purple-600 rounded-lg text-sm font-medium hover:bg-purple-50 transition-colors"
+                      >
+                        <FaUserPlus />
+                        Create Account
+                      </Link>
+                      <span className="text-gray-500 text-sm self-center">
+                        or continue as guest below
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Welcome Back Message for Logged In Users */}
+            {user && (
+              <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-2xl p-6 mb-8">
+                <div className="flex items-center gap-3">
+                  <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-full p-3">
+                    <FaUser className="text-purple-600 text-lg" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-800">
+                      Welcome back, {user.firstName}!
+                    </h3>
+                    <p className="text-gray-600 text-sm">
+                      Your details have been pre-filled for a faster checkout experience.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Personal Information */}
               <div className="bg-white rounded-2xl shadow-lg p-8">
@@ -447,11 +570,59 @@ const Checkout = () => {
                       value={formData.phone}
                       onChange={handleInputChange}
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${errors.phone ? 'border-red-500' : 'border-gray-300'}`}
-                      placeholder="Enter your phone number"
-                    />
+                      placeholder="Enter your phone number"                    />
                     {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                   </div>
                 </div>
+
+                {/* Optional Account Creation for Guest Users */}
+                {!user && (
+                  <div className="mt-8 pt-6 border-t border-gray-200">
+                    <div className="flex items-center gap-3 mb-4">
+                      <input
+                        type="checkbox"
+                        id="createAccount"
+                        name="createAccount"
+                        checked={formData.createAccount}
+                        onChange={(e) => setFormData(prev => ({ ...prev, createAccount: e.target.checked }))}
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+                      />
+                      <label htmlFor="createAccount" className="text-sm font-medium text-gray-700">
+                        Create an account to track your orders and save your information for future purchases
+                      </label>
+                    </div>
+
+                    {formData.createAccount && (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Password *</label>
+                          <input
+                            type="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleInputChange}
+                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
+                            placeholder="At least 6 characters"
+                          />
+                          {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">Confirm Password *</label>
+                          <input
+                            type="password"
+                            name="confirmPassword"
+                            value={formData.confirmPassword}
+                            onChange={handleInputChange}
+                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'}`}
+                            placeholder="Re-enter password"
+                          />
+                          {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               {/* Delivery Method */}
@@ -635,19 +806,17 @@ const Checkout = () => {
                         </div>
                       </div>
                     </label>
-                  </div>
-
-                  {/* Payment Method Information */}
+                  </div>                  {/* Payment Method Information */}
                   {formData.paymentMethod === 'paystack' && (
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-lg p-4">
                       <div className="flex items-center gap-2 mb-2">
-                        <FaShieldAlt className="text-blue-600" />
-                        <span className="font-semibold text-blue-800">Secure Online Payment</span>
+                        <FaShieldAlt className="text-purple-600" />
+                        <span className="font-semibold text-purple-800">Secure Online Payment</span>
                       </div>
-                      <p className="text-blue-700 text-sm">
+                      <p className="text-purple-700 text-sm">
                         Your payment will be processed securely through Paystack. You can pay with:
                       </p>
-                      <ul className="text-blue-700 text-sm mt-2 ml-4 list-disc">
+                      <ul className="text-purple-700 text-sm mt-2 ml-4 list-disc">
                         <li>Visa, Mastercard, Verve cards</li>
                         <li>MTN Mobile Money, Vodafone Cash, AirtelTigo Money</li>
                         <li>Bank transfer</li>
@@ -656,15 +825,15 @@ const Checkout = () => {
                   )}
 
                   {formData.paymentMethod === 'cash-on-delivery' && (
-                    <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <div className="bg-gradient-to-r from-pink-50 to-purple-50 border border-pink-200 rounded-lg p-4">
                       <div className="flex items-center gap-2 mb-2">
-                        <FaMoneyBillWave className="text-green-600" />
-                        <span className="font-semibold text-green-800">Cash on Delivery</span>
+                        <FaMoneyBillWave className="text-pink-600" />
+                        <span className="font-semibold text-pink-800">Cash on Delivery</span>
                       </div>
-                      <p className="text-green-700 text-sm">
+                      <p className="text-pink-700 text-sm">
                         Pay with cash when your order is delivered to you. Please have the exact amount ready.
                       </p>
-                      <div className="text-green-700 text-sm mt-2">
+                      <div className="text-pink-700 text-sm mt-2">
                         <strong>Total to pay on delivery: GHC {total.toFixed(2)}</strong>
                       </div>
                     </div>
@@ -760,14 +929,13 @@ const Checkout = () => {
                   </div>
                 </div>
 
-                {/* Security Features */}
-                <div className="mt-6 space-y-3">
+                {/* Security Features */}                <div className="mt-6 space-y-3">
                   <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <FaShieldAlt className="text-green-500" />
+                    <FaShieldAlt className="text-purple-500" />
                     <span>SSL Encrypted Checkout</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <FaTruck className="text-blue-500" />
+                    <FaTruck className="text-pink-500" />
                     <span>Free shipping on orders over GHC 100</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-gray-600">
