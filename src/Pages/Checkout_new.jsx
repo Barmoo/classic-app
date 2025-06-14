@@ -16,8 +16,7 @@ const Checkout = () => {  const { cartItems, getCartTotal, clearCart } = useCart
     lastName: '',
     email: '',
     phone: '',
-    
-    // Shipping Address
+      // Shipping Address
     address: '',
     city: '',
     region: '',
@@ -425,16 +424,14 @@ const Checkout = () => {  const { cartItems, getCartTotal, clearCart } = useCart
   }
 
   if (cartItems.length === 0) {
-    return (
-      <div className="min-h-screen bg-gray-50 pt-24 pb-12">
-        <div className="max-w-4xl mx-auto px-8 md:px-16 lg:px-24">
-          <div className="text-center py-20">
-            <div className="text-6xl mb-6">🛒</div>
-            <h1 className="text-3xl font-bold text-gray-800 mb-4">Your cart is empty</h1>
-            <p className="text-gray-600 mb-8">Add some products to proceed with checkout</p>
+    return (      <div className="min-h-screen bg-gray-50 pt-20 sm:pt-24 pb-8 sm:pb-12">
+        <div className="max-w-4xl mx-auto px-4 sm:px-8 md:px-16 lg:px-24">
+          <div className="text-center py-12 sm:py-20">
+            <div className="text-4xl sm:text-6xl mb-4 sm:mb-6">🛒</div>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-3 sm:mb-4">Your cart is empty</h1>            <p className="text-gray-600 mb-6 sm:mb-8 text-sm sm:text-base">Add some products to proceed with checkout</p>
             <button 
               onClick={() => navigate('/oil')}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300"
+              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 sm:px-8 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 text-sm sm:text-base"
             >
               Continue Shopping
             </button>
@@ -443,37 +440,38 @@ const Checkout = () => {  const { cartItems, getCartTotal, clearCart } = useCart
       </div>
     )
   }
-
   return (
-    <div className="min-h-screen bg-gray-50 pt-24 pb-12">
-      <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
+    <div className="min-h-screen bg-gray-50 pt-20 sm:pt-24 pb-8 sm:pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-16 lg:px-24">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">Checkout</h1>
-          <p className="text-gray-600">Complete your order securely and safely</p>
-        </div>        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="text-center mb-8 sm:mb-12">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-2 sm:mb-4">Checkout</h1>
+          <p className="text-gray-600 text-sm sm:text-base">Complete your order securely and safely</p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
           {/* Checkout Form */}
           <div className="lg:col-span-2">            {/* Login Suggestion for Guest Users */}
             {!user && (
-              <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-2xl p-6 mb-8">
-                <div className="flex items-start gap-4">
+              <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
+                <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
                   <div className="flex-shrink-0">
-                    <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-full p-3">
-                      <FaUser className="text-purple-600 text-lg" />
+                    <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-full p-2 sm:p-3">
+                      <FaUser className="text-purple-600 text-base sm:text-lg" />
                     </div>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                  <div className="flex-1 w-full">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-2">
                       Have an account? Sign in for a faster checkout
                     </h3>
                     <p className="text-gray-600 text-sm mb-4">
                       Skip filling out your details every time and track your orders easily.
                     </p>
-                    <div className="flex flex-wrap gap-3">
+                    <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-3">
                       <Link
                         to="/login"
                         state={{ from: { pathname: '/checkout' } }}
-                        className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg text-sm font-medium hover:from-purple-700 hover:to-pink-700 transition-all"
+                        className="flex items-center justify-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg text-sm font-medium hover:from-purple-700 hover:to-pink-700 transition-all w-full sm:w-auto"
                       >
                         <FaSignInAlt />
                         Sign In
@@ -481,12 +479,12 @@ const Checkout = () => {  const { cartItems, getCartTotal, clearCart } = useCart
                       <Link
                         to="/register"
                         state={{ from: { pathname: '/checkout' } }}
-                        className="flex items-center gap-2 px-4 py-2 border border-purple-600 text-purple-600 rounded-lg text-sm font-medium hover:bg-purple-50 transition-colors"
+                        className="flex items-center justify-center gap-2 px-4 py-2 border border-purple-600 text-purple-600 rounded-lg text-sm font-medium hover:bg-purple-50 transition-colors w-full sm:w-auto"
                       >
                         <FaUserPlus />
                         Create Account
                       </Link>
-                      <span className="text-gray-500 text-sm self-center">
+                      <span className="text-gray-500 text-sm self-center text-center sm:text-left">
                         or continue as guest below
                       </span>
                     </div>
@@ -497,13 +495,13 @@ const Checkout = () => {  const { cartItems, getCartTotal, clearCart } = useCart
 
             {/* Welcome Back Message for Logged In Users */}
             {user && (
-              <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-2xl p-6 mb-8">
+              <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8">
                 <div className="flex items-center gap-3">
-                  <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-full p-3">
-                    <FaUser className="text-purple-600 text-lg" />
+                  <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-full p-2 sm:p-3">
+                    <FaUser className="text-purple-600 text-base sm:text-lg" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-800">
                       Welcome back, {user.firstName}!
                     </h3>
                     <p className="text-gray-600 text-sm">
@@ -512,17 +510,15 @@ const Checkout = () => {  const { cartItems, getCartTotal, clearCart } = useCart
                   </div>
                 </div>
               </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-8">
+            )}            <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
               {/* Personal Information */}
-              <div className="bg-white rounded-2xl shadow-lg p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <FaUser className="text-purple-600 text-xl" />
-                  <h2 className="text-2xl font-semibold text-gray-800">Personal Information</h2>
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8">
+                <div className="flex items-center gap-3 mb-4 sm:mb-6">
+                  <FaUser className="text-purple-600 text-lg sm:text-xl" />
+                  <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">Personal Information</h2>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
                     <input
@@ -573,27 +569,25 @@ const Checkout = () => {  const { cartItems, getCartTotal, clearCart } = useCart
                       placeholder="Enter your phone number"                    />
                     {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                   </div>
-                </div>
-
-                {/* Optional Account Creation for Guest Users */}
+                </div>                {/* Optional Account Creation for Guest Users */}
                 {!user && (
-                  <div className="mt-8 pt-6 border-t border-gray-200">
-                    <div className="flex items-center gap-3 mb-4">
+                  <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gray-200">
+                    <div className="flex items-start sm:items-center gap-3 mb-4">
                       <input
                         type="checkbox"
                         id="createAccount"
                         name="createAccount"
                         checked={formData.createAccount}
                         onChange={(e) => setFormData(prev => ({ ...prev, createAccount: e.target.checked }))}
-                        className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded mt-0.5 sm:mt-0"
                       />
-                      <label htmlFor="createAccount" className="text-sm font-medium text-gray-700">
+                      <label htmlFor="createAccount" className="text-sm font-medium text-gray-700 leading-relaxed">
                         Create an account to track your orders and save your information for future purchases
                       </label>
                     </div>
 
                     {formData.createAccount && (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-4">
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-2">Password *</label>
                           <input
@@ -623,18 +617,16 @@ const Checkout = () => {  const { cartItems, getCartTotal, clearCart } = useCart
                     )}
                   </div>
                 )}
-              </div>
-
-              {/* Delivery Method */}
-              <div className="bg-white rounded-2xl shadow-lg p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <FaTruck className="text-purple-600 text-xl" />
-                  <h2 className="text-2xl font-semibold text-gray-800">Delivery Method</h2>
+              </div>              {/* Delivery Method */}
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8">
+                <div className="flex items-center gap-3 mb-4 sm:mb-6">
+                  <FaTruck className="text-purple-600 text-lg sm:text-xl" />
+                  <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">Delivery Method</h2>
                 </div>
                 
-                <div className="space-y-6">
+                <div className="space-y-4 sm:space-y-6">
                   {/* Delivery Method Selection */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <label className="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
                       <input
                         type="radio"
@@ -690,11 +682,9 @@ const Checkout = () => {  const { cartItems, getCartTotal, clearCart } = useCart
                       </select>
                       {errors.pickupStation && <p className="text-red-500 text-sm mt-1">{errors.pickupStation}</p>}
                     </div>
-                  )}
-
-                  {/* Address Fields - Only for Door Delivery */}
+                  )}                  {/* Address Fields - Only for Door Delivery */}
                   {formData.deliveryMethod === 'door-delivery' && (
-                    <div className="space-y-6">
+                    <div className="space-y-4 sm:space-y-6">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Street Address *</label>
                         <input
@@ -702,13 +692,13 @@ const Checkout = () => {  const { cartItems, getCartTotal, clearCart } = useCart
                           name="address"
                           value={formData.address}
                           onChange={handleInputChange}
-                          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${errors.address ? 'border-red-500' : 'border-gray-300'}`}
+                          className={`w-full px-3 sm:px-4 py-3 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${errors.address ? 'border-red-500' : 'border-gray-300'}`}
                           placeholder="Enter your street address"
                         />
                         {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address}</p>}
                       </div>
                       
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-2">City *</label>
                           <input
@@ -760,18 +750,16 @@ const Checkout = () => {  const { cartItems, getCartTotal, clearCart } = useCart
                     </div>
                   )}
                 </div>
-              </div>
-
-              {/* Payment Information */}
-              <div className="bg-white rounded-2xl shadow-lg p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <FaCreditCard className="text-purple-600 text-xl" />
-                  <h2 className="text-2xl font-semibold text-gray-800">Payment Method</h2>
+              </div>              {/* Payment Information */}
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8">
+                <div className="flex items-center gap-3 mb-4 sm:mb-6">
+                  <FaCreditCard className="text-purple-600 text-lg sm:text-xl" />
+                  <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">Payment Method</h2>
                 </div>
                 
                 {/* Payment Method Selection */}
                 <div className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <label className="flex items-center p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
                       <input
                         type="radio"
@@ -839,27 +827,23 @@ const Checkout = () => {  const { cartItems, getCartTotal, clearCart } = useCart
                     </div>
                   )}
                 </div>
-              </div>
-
-              {/* Order Notes */}
-              <div className="bg-white rounded-2xl shadow-lg p-8">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-6">Order Notes (Optional)</h2>
+              </div>              {/* Order Notes */}
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8">
+                <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-4 sm:mb-6">Order Notes (Optional)</h2>
                 <textarea
                   name="orderNotes"
                   value={formData.orderNotes}
                   onChange={handleInputChange}
                   rows="4"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-3 sm:px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm sm:text-base"
                   placeholder="Any special instructions for your order..."
                 ></textarea>
-              </div>              
-              
-              {/* Submit Button */}
-              <div className="text-center">
-                <button
+              </div>
+                {/* Submit Button */}
+              <div className="text-center">                <button
                   type="submit"
                   disabled={isProcessing}
-                  className="w-full lg:w-auto px-12 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full sm:w-auto px-8 sm:px-12 py-3 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
                 >
                   {isProcessing ? (
                     <div className="flex items-center justify-center gap-2">
@@ -876,13 +860,12 @@ const Checkout = () => {  const { cartItems, getCartTotal, clearCart } = useCart
             </form>
           </div>
 
-          {/* Order Summary */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-28">
-              <div className="bg-white rounded-2xl shadow-lg p-8">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-6">Order Summary</h2>
+          {/* Order Summary */}          <div className="lg:col-span-1">
+            <div className="lg:sticky lg:top-28">
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8">
+                <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-4 sm:mb-6">Order Summary</h2>
                   {/* Cart Items */}
-                <div className="space-y-4 mb-6">
+                <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
                   {cartItems.map((item) => {
                     // Helper function to get numeric price value - matching CartContext logic
                     const getNumericPrice = (price) => {
