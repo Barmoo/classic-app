@@ -77,28 +77,7 @@ const Navbar = () => {
             >
               Contact
             </Link>
-          </div>        </div>        
-        {/* Mobile Right Navigation Group - Cart, Price, and Hamburger together */}
-        <div className="md:hidden flex items-center">
-          {/* Mobile Cart & Price - Always visible on mobile */}
-          <div className="flex items-center mr-7">
-            <span className="text-yellow-400 font-bold text-sm mr-1">GHC {getCartTotal().toFixed(2)}</span>
-            
-            {/* Mobile Cart Button */}
-            <button 
-              onClick={() => setCartOpen(true)}
-              className="cursor-pointer hover:text-yellow-400 transition flex items-center relative ml-1"
-            >
-              <FaShoppingCart className="text-lg" />
-              {getCartItemsCount() > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-3 w-3 flex items-center justify-center animate-bounce-in text-[10px]">
-                  {getCartItemsCount()}
-                </span>
-              )}
-            </button>
-          </div>
-
-        {/* Desktop Price, Cart, and Auth - Right */}
+          </div>        </div>          {/* Desktop Price, Cart, and Auth - Right */}
         <div className="hidden md:flex flex-shrink-0 items-center gap-x-4">
           <span className="cursor-pointer text-yellow-400 font-bold">GHC {getCartTotal().toFixed(2)}</span>
           
@@ -168,7 +147,29 @@ const Navbar = () => {
               </Link>
             </div>
           )}
-        </div>          {/* Hamburger menu button */}
+        </div>
+
+        {/* Mobile Right Navigation Group - Cart, Price, and Hamburger together */}
+        <div className="md:hidden flex items-center">
+          {/* Mobile Cart & Price - Always visible on mobile */}
+          <div className="flex items-center mr-7">
+            <span className="text-yellow-400 font-bold text-sm mr-1">GHC {getCartTotal().toFixed(2)}</span>
+            
+            {/* Mobile Cart Button */}
+            <button 
+              onClick={() => setCartOpen(true)}
+              className="cursor-pointer hover:text-yellow-400 transition flex items-center relative ml-1"
+            >
+              <FaShoppingCart className="text-lg" />
+              {getCartItemsCount() > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-3 w-3 flex items-center justify-center animate-bounce-in text-[10px]">
+                  {getCartItemsCount()}
+                </span>
+              )}
+            </button>
+          </div>
+
+          {/* Hamburger menu button */}
           <button
             className="flex flex-col justify-center items-center"
             onClick={() => setMenuOpen(!menuOpen)}

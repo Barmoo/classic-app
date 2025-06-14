@@ -16,7 +16,7 @@ import About from "./Pages/About";
 import OilCategory from "./Pages/OilCategory";
 import CoconutSnacks from "./Pages/CoconutSnacks";
 import ProductDetail from "./Pages/ProductDetail";
-import Checkout from "./Pages/Checkout";
+import Checkout from "./Pages/Checkout_new";
 import BeautyProducts from "./Pages/BeautyProducts";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import TermsOfService from "./Pages/TermsOfService";
@@ -24,6 +24,7 @@ import CookiePolicy from "./Pages/CookiePolicy";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Profile from "./Pages/Profile";
+import OrderSuccess from "./Pages/OrderSuccess";
 
 // Home page component
 const HomePage = () => {
@@ -52,8 +53,8 @@ const App = () => {
                                 <Route path="/product/:id" element={<ProductDetail />} />
                                 <Route path="/beauty" element={<BeautyProducts />} />
                                 <Route path="/about" element={<About />} />
-                                <Route path="/contact" element={<Contact />} />
-                                <Route path="/checkout" element={<Checkout />} />
+                                <Route path="/contact" element={<Contact />} />                                <Route path="/checkout" element={<Checkout />} />
+                                <Route path="/order-success" element={<OrderSuccess />} />
                                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                                 <Route path="/terms-of-service" element={<TermsOfService />} />
                                 <Route path="/cookie-policy" element={<CookiePolicy />} />
