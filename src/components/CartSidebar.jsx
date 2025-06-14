@@ -14,56 +14,54 @@ const CartSidebar = ({ isOpen, onClose }) => {
         className="fixed inset-0 bg-gray-500 bg-opacity-30 z-40"
         onClick={onClose}
       ></div>
-      
-      {/* Sidebar */}
-      <div className="fixed top-0 right-0 h-full w-full max-w-md bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out">
+        {/* Sidebar */}
+      <div className="fixed top-0 right-0 h-full w-full max-w-md sm:max-w-sm bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out">
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b bg-gradient-to-r from-purple-600 to-pink-600 text-white">
-            <h2 className="text-xl font-semibold">Shopping Cart</h2>
+          <div className="flex items-center justify-between p-4 sm:p-6 border-b bg-gradient-to-r from-purple-600 to-pink-600 text-white">
+            <h2 className="text-lg sm:text-xl font-semibold">Shopping Cart</h2>
             <button 
               onClick={onClose}
               className="p-2 hover:bg-white/20 rounded-full transition-colors"
             >
-              <FaTimes />
+              <FaTimes className="text-sm sm:text-base" />
             </button>
-          </div>
-
-          {/* Cart Items */}
-          <div className="flex-1 overflow-y-auto p-6">
+          </div>          {/* Cart Items */}
+          <div className="flex-1 overflow-y-auto p-3 sm:p-6">
             {cartItems.length === 0 ? (
-              <div className="text-center py-12 text-gray-500">
-                <div className="text-6xl mb-4">🛒</div>
-                <p className="text-lg">Your cart is empty</p>
-                <p className="text-sm">Add some products to get started!</p>
+              <div className="text-center py-8 sm:py-12 text-gray-500">
+                <div className="text-4xl sm:text-6xl mb-3 sm:mb-4">🛒</div>
+                <p className="text-base sm:text-lg">Your cart is empty</p>
+                <p className="text-xs sm:text-sm">Add some products to get started!</p>
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {cartItems.map((item) => (
-                  <div key={item.id} className="flex items-center gap-4 p-4 border rounded-lg">                    <img 
+                  <div key={item.id} className="flex items-start gap-2 sm:gap-4 p-3 sm:p-4 border rounded-lg">
+                    <img 
                       src={item.images ? item.images[0] : item.image} 
                       alt={item.name}
-                      className="w-16 h-16 object-cover rounded-lg"
+                      className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded-lg flex-shrink-0"
                     />
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-gray-800">{item.name}</h3>
-                      <p className="text-purple-600 font-semibold">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-gray-800 text-sm sm:text-base truncate">{item.name}</h3>
+                      <p className="text-purple-600 font-semibold text-sm sm:text-base">
                         {typeof item.price === 'string' ? item.price : `GHC ${item.price.toFixed(2)}`}
                       </p>
                       
                       {/* Quantity Controls */}
-                      <div className="flex items-center gap-2 mt-2">
+                      <div className="flex items-center gap-1 sm:gap-2 mt-1 sm:mt-2">
                         <button 
                           onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          className="p-1 hover:bg-gray-100 rounded"
+                          className="p-1 hover:bg-gray-100 rounded text-xs sm:text-sm"
                           disabled={item.quantity <= 1}
                         >
                           <FaMinus className="text-xs" />
                         </button>
-                        <span className="px-3 py-1 border rounded">{item.quantity}</span>
+                        <span className="px-2 sm:px-3 py-1 border rounded text-xs sm:text-sm min-w-[2rem] text-center">{item.quantity}</span>
                         <button 
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="p-1 hover:bg-gray-100 rounded"
+                          className="p-1 hover:bg-gray-100 rounded text-xs sm:text-sm"
                         >
                           <FaPlus className="text-xs" />
                         </button>
@@ -71,9 +69,9 @@ const CartSidebar = ({ isOpen, onClose }) => {
                     </div>
                     <button 
                       onClick={() => removeFromCart(item.id)}
-                      className="p-2 text-red-500 hover:bg-red-50 rounded-full transition-colors"
+                      className="p-1 sm:p-2 text-red-500 hover:bg-red-50 rounded-full transition-colors flex-shrink-0"
                     >
-                      <FaTrash />
+                      <FaTrash className="text-xs sm:text-sm" />
                     </button>
                   </div>
                 ))}

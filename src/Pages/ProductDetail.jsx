@@ -236,9 +236,9 @@ const ProductDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-24">
-      {/* Breadcrumb */}
-      <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 py-4">        <div className="flex items-center gap-2 text-sm text-gray-600">
+    <div className="min-h-screen bg-gray-50 pt-24">      {/* Breadcrumb */}
+      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-24 py-4">
+        <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
           <Link to="/" className="hover:text-purple-600">Home</Link>
           <span>/</span>
           <Link 
@@ -248,32 +248,32 @@ const ProductDetail = () => {
             {productCategory === 'snacks' ? 'Coconut Snacks' : 'Natural Oils'}
           </Link>
           <span>/</span>
-          <span className="text-gray-800">{product.name}</span>
+          <span className="text-gray-800 truncate">{product.name}</span>
         </div>
-      </div>      {/* Back Button */}
-      <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 mb-6">
+      </div>
+
+      {/* Back Button */}
+      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-24 mb-6">
         <Link 
           to={productCategory === 'snacks' ? '/snacks' : '/oil'}
-          className="flex items-center gap-2 text-purple-600 hover:text-purple-800 transition-colors"
+          className="flex items-center gap-2 text-purple-600 hover:text-purple-800 transition-colors text-sm"
         >
           <FaArrowLeft />
           Back to {productCategory === 'snacks' ? 'Coconut Snacks' : 'Oil Category'}
         </Link>
-      </div>
-
-      {/* Product Detail */}
-      <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      </div>      {/* Product Detail */}
+      <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-24 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
           {/* Product Images */}
           <div className="space-y-4">
             <div className="relative bg-white rounded-2xl p-4 shadow-lg">
               <img 
                 src={product.images[selectedImage]} 
                 alt={product.name}
-                className="w-full h-96 object-cover rounded-lg"
+                className="w-full h-64 sm:h-80 lg:h-96 object-cover rounded-lg"
               />
               {product.badge && (
-                <span className="absolute top-6 left-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                <span className="absolute top-6 left-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-semibold">
                   {product.badge}
                 </span>
               )}
@@ -285,7 +285,7 @@ const ProductDetail = () => {
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`w-20 h-20 rounded-lg border-2 overflow-hidden ${
+                  className={`w-16 h-16 sm:w-20 sm:h-20 rounded-lg border-2 overflow-hidden ${
                     selectedImage === index ? 'border-purple-600' : 'border-gray-200'
                   }`}
                 >
@@ -300,39 +300,41 @@ const ProductDetail = () => {
           </div>
 
           {/* Product Info */}
-          <div className="space-y-6">
+          <div className="space-y-4 lg:space-y-6">
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{product.name}</h1>
-              <p className="text-lg text-gray-600">{product.description}</p>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-2">{product.name}</h1>
+              <p className="text-base lg:text-lg text-gray-600">{product.description}</p>
             </div>
 
             {/* Rating */}
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
               <div className="flex items-center gap-2">
                 <div className="flex">{renderStars(product.rating)}</div>
-                <span className="text-lg font-semibold">{product.rating}</span>
+                <span className="text-base sm:text-lg font-semibold">{product.rating}</span>
               </div>
-              <span className="text-gray-600">({product.reviews} reviews)</span>
+              <span className="text-sm sm:text-base text-gray-600">({product.reviews} reviews)</span>
             </div>            {/* Price */}
-            <div className="flex items-center gap-4">
-              <span className="text-3xl font-bold text-purple-700">{formatPrice(product.price)}</span>
+            <div className="space-y-2">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                <span className="text-2xl sm:text-3xl font-bold text-purple-700">{formatPrice(product.price)}</span>
+                {product.originalPrice && (
+                  <span className="text-lg sm:text-xl text-gray-400 line-through">{formatPrice(product.originalPrice)}</span>
+                )}
+              </div>
               {product.originalPrice && (
-                <span className="text-xl text-gray-400 line-through">{formatPrice(product.originalPrice)}</span>
-              )}
-              {product.originalPrice && (
-                <span className="bg-red-100 text-red-600 px-2 py-1 rounded-full text-sm font-semibold">
+                <span className="inline-block bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs sm:text-sm font-semibold">
                   Save {((getNumericPrice(product.originalPrice) - getNumericPrice(product.price)) / getNumericPrice(product.originalPrice) * 100).toFixed(0)}%
                 </span>
               )}
-            </div>
-
-            {/* Stock Status */}
-            <div className="flex items-center gap-2">
+            </div>            {/* Stock Status */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
               {product.inStock ? (
                 <>
-                  <FaCheck className="text-green-500" />
-                  <span className="text-green-600 font-semibold">In Stock</span>
-                  <span className="text-gray-600">({product.stockCount} available)</span>
+                  <div className="flex items-center gap-2">
+                    <FaCheck className="text-green-500" />
+                    <span className="text-green-600 font-semibold">In Stock</span>
+                  </div>
+                  <span className="text-sm text-gray-600">({product.stockCount} available)</span>
                 </>
               ) : (
                 <span className="text-red-600 font-semibold">Out of Stock</span>
@@ -340,38 +342,36 @@ const ProductDetail = () => {
             </div>
 
             {/* Product Details */}
-            <div className="bg-gray-100 rounded-lg p-4 space-y-2">
-              <div className="flex justify-between">
-                <span className="font-semibold">Weight:</span>
-                <span>{product.weight}</span>
+            <div className="bg-gray-100 rounded-lg p-3 sm:p-4 space-y-2">
+              <div className="flex justify-between items-start">
+                <span className="font-semibold text-sm sm:text-base">Weight:</span>
+                <span className="text-sm sm:text-base">{product.weight}</span>
               </div>
-              <div className="flex justify-between">
-                <span className="font-semibold">Origin:</span>
-                <span>{product.origin}</span>
+              <div className="flex justify-between items-start">
+                <span className="font-semibold text-sm sm:text-base">Origin:</span>
+                <span className="text-sm sm:text-base">{product.origin}</span>
               </div>
-              <div className="flex justify-between">
-                <span className="font-semibold">Ingredients:</span>
-                <span className="text-right">{product.ingredients}</span>
+              <div className="flex justify-between items-start">
+                <span className="font-semibold text-sm sm:text-base">Ingredients:</span>
+                <span className="text-right text-sm sm:text-base max-w-[60%]">{product.ingredients}</span>
               </div>
-            </div>
-
-            {/* Quantity and Add to Cart */}
+            </div>            {/* Quantity and Add to Cart */}
             {product.inStock && (
               <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <span className="font-semibold">Quantity:</span>
-                  <div className="flex items-center border border-gray-300 rounded-lg">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                  <span className="font-semibold text-sm sm:text-base">Quantity:</span>
+                  <div className="flex items-center border border-gray-300 rounded-lg w-fit">
                     <button 
                       onClick={() => handleQuantityChange(-1)}
-                      className="px-3 py-2 hover:bg-gray-100 transition-colors"
+                      className="px-3 py-2 hover:bg-gray-100 transition-colors text-sm sm:text-base"
                       disabled={quantity <= 1}
                     >
                       -
                     </button>
-                    <span className="px-4 py-2 border-x border-gray-300">{quantity}</span>
+                    <span className="px-3 sm:px-4 py-2 border-x border-gray-300 text-sm sm:text-base min-w-[40px] text-center">{quantity}</span>
                     <button 
                       onClick={() => handleQuantityChange(1)}
-                      className="px-3 py-2 hover:bg-gray-100 transition-colors"
+                      className="px-3 py-2 hover:bg-gray-100 transition-colors text-sm sm:text-base"
                       disabled={quantity >= product.stockCount}
                     >
                       +
@@ -379,20 +379,22 @@ const ProductDetail = () => {
                   </div>
                 </div>
 
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   <button 
                     onClick={handleAddToCart}
-                    className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center justify-center gap-2"
+                    className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 sm:py-4 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base"
                   >
                     <FaShoppingCart />
                     Add to Cart
                   </button>
-                  <button className="px-6 py-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                    <FaHeart className="text-pink-500" />
-                  </button>
-                  <button className="px-6 py-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                    <FaShare className="text-gray-600" />
-                  </button>
+                  <div className="flex gap-3 sm:gap-0">
+                    <button className="flex-1 sm:flex-none px-4 sm:px-6 py-3 sm:py-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center">
+                      <FaHeart className="text-pink-500" />
+                    </button>
+                    <button className="flex-1 sm:flex-none px-4 sm:px-6 py-3 sm:py-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center">
+                      <FaShare className="text-gray-600" />
+                    </button>
+                  </div>
                 </div>
               </div>
             )}

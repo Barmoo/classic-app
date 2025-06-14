@@ -20,8 +20,7 @@ const Navbar = () => {
     return false;
   };
 
-  return (    <nav className="fixed top-0 left-0 z-50 w-full bg-gradient-to-r from-pink-600 to-purple-700 text-white shadow-lg">
-      <div className="flex justify-between items-center py-2 px-8 md:px-16 lg:px-24">
+  return (    <nav className="fixed top-0 left-0 z-50 w-full bg-gradient-to-r from-pink-600 to-purple-700 text-white shadow-lg">      <div className="flex justify-between items-center py-2 px-3 md:px-16 lg:px-24">
         {/* Logo - Left */}
         <div className="flex-shrink-0">
           <Link to="/" className="flex items-center">
@@ -39,7 +38,7 @@ const Navbar = () => {
               }`}
             >
               Everything
-            </Link>            <Link 
+            </Link><Link 
               to="/oil" 
               className={`cursor-pointer hover:text-yellow-400 transition pb-1 ${
                 isActive('/oil') ? 'border-b-2 border-yellow-400 text-yellow-400' : ''
@@ -78,8 +77,28 @@ const Navbar = () => {
             >
               Contact
             </Link>
+          </div>        </div>        
+        {/* Mobile Right Navigation Group - Cart, Price, and Hamburger together */}
+        <div className="md:hidden flex items-center">
+          {/* Mobile Cart & Price - Always visible on mobile */}
+          <div className="flex items-center mr-7">
+            <span className="text-yellow-400 font-bold text-sm mr-1">GHC {getCartTotal().toFixed(2)}</span>
+            
+            {/* Mobile Cart Button */}
+            <button 
+              onClick={() => setCartOpen(true)}
+              className="cursor-pointer hover:text-yellow-400 transition flex items-center relative ml-1"
+            >
+              <FaShoppingCart className="text-lg" />
+              {getCartItemsCount() > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-3 w-3 flex items-center justify-center animate-bounce-in text-[10px]">
+                  {getCartItemsCount()}
+                </span>
+              )}
+            </button>
           </div>
-        </div>        {/* Price, Cart, and Auth - Right */}
+
+        {/* Desktop Price, Cart, and Auth - Right */}
         <div className="hidden md:flex flex-shrink-0 items-center gap-x-4">
           <span className="cursor-pointer text-yellow-400 font-bold">GHC {getCartTotal().toFixed(2)}</span>
           
@@ -149,17 +168,17 @@ const Navbar = () => {
               </Link>
             </div>
           )}
+        </div>          {/* Hamburger menu button */}
+          <button
+            className="flex flex-col justify-center items-center"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span className={`block h-0.5 w-6 bg-white mb-1 transition-all ${menuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
+            <span className={`block h-0.5 w-6 bg-white mb-1 transition-all ${menuOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`block h-0.5 w-6 bg-white transition-all ${menuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+          </button>
         </div>
-        {/* Hamburger menu button */}
-        <button
-          className="md:hidden flex flex-col justify-center items-center"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          <span className={`block h-0.5 w-6 bg-white mb-1 transition-all ${menuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
-          <span className={`block h-0.5 w-6 bg-white mb-1 transition-all ${menuOpen ? 'opacity-0' : ''}`}></span>
-          <span className={`block h-0.5 w-6 bg-white transition-all ${menuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
-        </button>
       </div>      {/* Mobile menu */}      {menuOpen && (        <div className="md:hidden bg-gray-700 shadow-lg px-4 py-4 space-y-4">
           <div className="flex flex-col space-y-2">
             <Link 
@@ -215,23 +234,6 @@ const Navbar = () => {
               Contact
             </Link>
           </div>          <div className="flex flex-col space-y-2 border-t pt-4">
-            <span className="cursor-pointer text-green-400 font-semibold">GHC {getCartTotal().toFixed(2)}</span>
-            <button 
-              onClick={() => {
-                setCartOpen(true)
-                setMenuOpen(false)
-              }}
-              className="cursor-pointer hover:text-yellow-400 transition flex items-center gap-1 relative text-left"
-            >
-              <FaShoppingCart className="text-lg" />
-              Cart
-              {getCartItemsCount() > 0 && (
-                <span className="bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center ml-1">
-                  {getCartItemsCount()}
-                </span>
-              )}
-            </button>
-            
             {/* Mobile Authentication */}
             <div className="border-t pt-2 mt-2">
               {user ? (
