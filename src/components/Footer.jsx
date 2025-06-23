@@ -171,7 +171,7 @@ const Footer = () => {
                     href="https://wa.me/233249130774" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="bg-gradient-to-r from-green-500 to-green-600 p-3 rounded-full hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-110"
+                    className="bg-gradient-to-r from-pink-500 to-purple-600 p-3 rounded-full hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-110"
                     aria-label="WhatsApp"
                   >
                     <FaWhatsapp className="text-lg" />
