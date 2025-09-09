@@ -64,7 +64,7 @@ const Product = () => {
       id: 4,
       img: Chips1, 
       name: "Coconut Chips Delight", 
-      price: "GHC 90.00",
+      price: "GHC 40.00",
       description: "Crispy, naturally sweet coconut chips for healthy snacking.",
       rating: 4.5,
       reviews: 78,
@@ -199,7 +199,7 @@ const Product = () => {
                   product: {
                     id: 1,
                     name: 'Premium Coconut Chips - Original',
-                    price: 15.99,
+                    price: 40.00,
                     images: [Chips1],
                     rating: 4.7,
                     reviews: 89,
@@ -244,7 +244,7 @@ const Product = () => {
                   product: {
                     id: 2,
                     name: 'Spiced Coconut Chips',
-                    price: 17.99,
+                    price: 40.00,
                     images: [Chips2],
                     rating: 4.6,
                     reviews: 67,
@@ -289,7 +289,7 @@ const Product = () => {
                   product: {
                     id: 3,
                     name: 'Toasted Coconut Chips',
-                    price: 16.99,
+                    price: 40.00,
                     images: [Chips3],
                     rating: 4.8,
                     reviews: 94,
@@ -342,13 +342,13 @@ const Product = () => {
             </p>
           </div>          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[ 
-              { id: 101, img: Earrings, label: "Elegant Earrings", price: "GHC 50.00", rating: 4.3, reviews: 28, category: "beauty" },
-              { id: 102, img: Earrings2, label: "Classic Collection", price: "GHC 45.00", rating: 4.5, reviews: 35, category: "beauty" },
-              { id: 103, img: Earrings3, label: "Modern Design", price: "GHC 60.00", rating: 4.7, reviews: 42, category: "beauty" },
-              { id: 104, img: Earrings4, label: "Premium Style", price: "GHC 55.00", rating: 4.4, reviews: 31, category: "beauty" },
-              { id: 105, img: Wrist, label: "Luxury Bracelet", price: "GHC 70.00", rating: 4.6, reviews: 48, category: "beauty" },
-              { id: 106, img: Wrist2, label: "Stylish Band", price: "GHC 65.00", rating: 4.5, reviews: 39, category: "beauty" },
-              { id: 107, img: Wrist3, label: "Designer Piece", price: "GHC 75.00", rating: 4.8, reviews: 52, category: "beauty" },
+              { id: 101, img: Earrings, label: "Elegant Earrings", price: "GHC 100.00", rating: 4.3, reviews: 28, category: "beauty" },
+              { id: 102, img: Earrings2, label: "Classic Collection", price: "GHC 100.00", rating: 4.5, reviews: 35, category: "beauty" },
+              { id: 103, img: Earrings3, label: "Modern Design", price: "GHC 40.00", rating: 4.7, reviews: 42, category: "beauty" },
+              { id: 104, img: Earrings4, label: "Premium Style", price: "GHC 40.00", rating: 4.4, reviews: 31, category: "beauty" },
+              { id: 105, img: Wrist, label: "Luxury Bracelet", price: "GHC 80.00", rating: 4.6, reviews: 48, category: "beauty" },
+              { id: 106, img: Wrist2, label: "Stylish Band", price: "GHC 80.00", rating: 4.5, reviews: 39, category: "beauty" },
+              { id: 107, img: Wrist3, label: "Designer Piece", price: "GHC 80.00", rating: 4.8, reviews: 52, category: "beauty" },
               { id: 108, img: Wrist4, label: "Exclusive Design", price: "GHC 80.00", rating: 4.7, reviews: 44, category: "beauty" },
               { id: 109, img: Scarf, label: "Silk Scarf", price: "GHC 100.00", rating: 4.2, reviews: 26, category: "beauty" },
               { id: 110, img: Scarf2, label: "Premium Fabric", price: "GHC 100.00", rating: 4.4, reviews: 33, category: "beauty" }
