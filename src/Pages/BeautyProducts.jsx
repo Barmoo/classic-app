@@ -30,7 +30,7 @@ const BeautyProducts = () => {
     {
       id: 101,
       name: "Elegant Diamond Earrings",
-      price: "GHC 50.00",
+      price: "GHC 100.00",
       originalPrice: "GHC 70.00",
       image: Earrings,
       rating: 4.8,
@@ -43,7 +43,7 @@ const BeautyProducts = () => {
     {
       id: 102,
       name: "Classic Pearl Collection",
-      price: "GHC 45.00",
+      price: "GHC 100.00",
       image: Earrings2,
       rating: 4.6,
       reviews: 98,
@@ -54,7 +54,7 @@ const BeautyProducts = () => {
     {
       id: 103,
       name: "Modern Geometric Design",
-      price: "GHC 60.00",
+      price: "GHC 40.00",
       image: Earrings3,
       rating: 4.7,
       reviews: 134,
@@ -66,7 +66,7 @@ const BeautyProducts = () => {
     {
       id: 104,
       name: "Premium Gold Style",
-      price: "GHC 55.00",
+      price: "GHC 100.00",
       image: Earrings4,
       rating: 4.5,
       reviews: 87,
@@ -77,7 +77,7 @@ const BeautyProducts = () => {
     {
       id: 105,
       name: "Luxury Tennis Bracelet",
-      price: "GHC 70.00",
+      price: "GHC 80.00",
       originalPrice: "GHC 95.00",
       image: Wrist,
       rating: 4.9,
@@ -90,7 +90,7 @@ const BeautyProducts = () => {
     {
       id: 106,
       name: "Stylish Chain Band",
-      price: "GHC 65.00",
+      price: "GHC 80.00",
       image: Wrist2,
       rating: 4.4,
       reviews: 76,
@@ -101,7 +101,7 @@ const BeautyProducts = () => {
     {
       id: 107,
       name: "Designer Charm Piece",
-      price: "GHC 75.00",
+      price: "GHC 80.00",
       image: Wrist3,
       rating: 4.8,
       reviews: 145,
@@ -124,7 +124,7 @@ const BeautyProducts = () => {
     {
       id: 109,
       name: "Silk Infinity Scarf",
-      price: "GHC 40.00",
+      price: "GHC 100.00",
       image: Scarf,
       rating: 4.3,
       reviews: 89,
@@ -135,7 +135,7 @@ const BeautyProducts = () => {
     {
       id: 110,
       name: "Premium Cashmere Blend",
-      price: "GHC 42.00",
+      price: "GHC 100.00",
       image: Scarf2,
       rating: 4.6,
       reviews: 67,

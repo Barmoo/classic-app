@@ -350,8 +350,8 @@ const Product = () => {
               { id: 106, img: Wrist2, label: "Stylish Band", price: "GHC 65.00", rating: 4.5, reviews: 39, category: "beauty" },
               { id: 107, img: Wrist3, label: "Designer Piece", price: "GHC 75.00", rating: 4.8, reviews: 52, category: "beauty" },
               { id: 108, img: Wrist4, label: "Exclusive Design", price: "GHC 80.00", rating: 4.7, reviews: 44, category: "beauty" },
-              { id: 109, img: Scarf, label: "Silk Scarf", price: "GHC 40.00", rating: 4.2, reviews: 26, category: "beauty" },
-              { id: 110, img: Scarf2, label: "Premium Fabric", price: "GHC 42.00", rating: 4.4, reviews: 33, category: "beauty" }
+              { id: 109, img: Scarf, label: "Silk Scarf", price: "GHC 100.00", rating: 4.2, reviews: 26, category: "beauty" },
+              { id: 110, img: Scarf2, label: "Premium Fabric", price: "GHC 100.00", rating: 4.4, reviews: 33, category: "beauty" }
             ].map((item, idx) => (
               <div
                 key={idx}
