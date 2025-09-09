@@ -66,7 +66,7 @@ const BeautyProducts = () => {
     {
       id: 104,
       name: "Premium Gold Style",
-      price: "GHC 100.00",
+      price: "GHC 40.00",
       image: Earrings4,
       rating: 4.5,
       reviews: 87,
