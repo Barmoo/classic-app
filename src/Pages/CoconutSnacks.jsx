@@ -19,7 +19,7 @@ const CoconutSnacks = () => {
     {
       id: 1,
       name: 'Premium Coconut Chips - Original',
-      price: 15.99,
+      price: 40.00,
       images: [chips1],
       rating: 4.7,
       reviews: 89,
@@ -42,7 +42,7 @@ const CoconutSnacks = () => {
     {
       id: 2,
       name: 'Spiced Coconut Chips',
-      price: 17.99,
+      price: 40.00,
       images: [chips2],
       rating: 4.6,
       reviews: 67,
@@ -65,7 +65,7 @@ const CoconutSnacks = () => {
     {
       id: 3,
       name: 'Toasted Coconut Chips',
-      price: 16.99,
+      price: 40.00,
       images: [chips3],
       rating: 4.8,
       reviews: 94,
@@ -88,7 +88,7 @@ const CoconutSnacks = () => {
     {
       id: 4,
       name: 'Organic Coconut Flour',
-      price: 12.99,
+      price: 80.00,
       images: [coconutFlour],
       rating: 4.9,
       reviews: 156,
@@ -111,7 +111,7 @@ const CoconutSnacks = () => {
     {
       id: 5,
       name: 'Desiccated Coconut',
-      price: 10.99,
+      price: 150.00,
       images: [desiccated],
       rating: 4.5,
       reviews: 78,
@@ -134,7 +134,7 @@ const CoconutSnacks = () => {
     {
       id: 6,
       name: 'Coconut Flakes',
-      price: 13.99,
+      price: 80.00,
       images: [flakes],
       rating: 4.6,
       reviews: 112,

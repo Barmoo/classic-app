@@ -31,7 +31,7 @@ const BeautyProducts = () => {
       id: 101,
       name: "Elegant Diamond Earrings",
       price: "GHC 100.00",
-      originalPrice: "GHC 70.00",
+      originalPrice: "GHC 120.00",
       image: Earrings,
       rating: 4.8,
       reviews: 156,

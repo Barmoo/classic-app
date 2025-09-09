@@ -3,7 +3,7 @@ import { useCart } from '../context/CartContext'
 import { useToast } from '../context/ToastContext'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate, Link } from 'react-router-dom'
-import { FaShieldAlt, FaTruck, FaCreditCard, FaUser, FaMapMarkerAlt, FaPhone, FaEnvelope, FaLock, FaMoneyBillWave, FaMapPin, FaStore, FaSignInAlt, FaUserPlus } from 'react-icons/fa'
+import { FaShieldAlt, FaTruck, FaCreditCard, FaUser, FaLock, FaMoneyBillWave, FaMapPin, FaStore, FaSignInAlt, FaUserPlus } from 'react-icons/fa'
 
 const Checkout = () => {  const { cartItems, getCartTotal, clearCart } = useCart()
   const { showToast } = useToast()
